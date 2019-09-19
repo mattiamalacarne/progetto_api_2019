@@ -156,29 +156,6 @@ entity_node_t *create_new_node(char name[MAX_NAME_SIZE], entity_node_t *parent)
     return new_node;
 }
 
-/*entity_node_t *find_entity_in_tree(char name[MAX_NAME_SIZE], entity_node_t *tree_head)
-{
-    if (!strcmp(tree_head->name, FIRST_TRY)) return NULL;
-
-    // Mi muovo nell'albero
-    while (1)
-    {
-        if (!strcmp(tree_head->name, name)) return tree_head;
-
-        if (strcmp(tree_head->name, name) < 0)
-        {
-            if (tree_head->left == NULL) return NULL;
-            else (tree_head = tree_head->left);
-        }
-
-        if (strcmp(tree_head->name, name) > 0)
-        {
-            if (tree_head->right == NULL) return NULL;
-            else (tree_head = tree_head->right);
-        }
-    }
-}*/
-
 entity_node_t *find_entity_in_tree(char name[MAX_NAME_SIZE], entity_node_t *tree_head)
 {
     if ((tree_head == NULL) || !strcmp(tree_head->name, name)) return tree_head;
@@ -186,40 +163,6 @@ entity_node_t *find_entity_in_tree(char name[MAX_NAME_SIZE], entity_node_t *tree
     if (strcmp(tree_head->name, name) < 0) return find_entity_in_tree(name, tree_head->left);
     else return find_entity_in_tree(name, tree_head->right);
 }
-
-/*
-void addent(char name[MAX_NAME_SIZE], entity_node_t *T)
-{
-    entity_node_t *y = NULL;
-    entity_node_t *x = T;
-    entity_node_t *z = create_new_node(name, NULL);
-
-    while (x != NULL)
-    {
-        y = x;
-        if (!strcmp(z->name, x->name)) return;
-        if (strcmp(z->name, x->name) < 0)
-        {
-            x = x->left;
-        } else
-        {
-            x = x->right;
-        }
-    }
-
-    z->parent = y;
-    if (y == NULL)
-    {
-        T = z; // L'albero è vuoto;
-    } else if (strcmp(z->name, y->name) < 0)
-    {
-        y->left = z;
-    } else
-    {
-        y->right = z;
-    }
-}
- */
 
 void addent(char name[MAX_NAME_SIZE], entity_node_t *tree_head)
 {
@@ -432,63 +375,13 @@ rel_name_t *find_exis_rel(char name[REL_SIZE], rel_name_t *list)
 
     return NULL;
 }
-/*
-rel_element_t *find_exis_rel(char name[REL_SIZE], rel_element_t *list)
-{
-    while (list != NULL)
-    {
-        if (!strcmp(list->name, name)) return list;
-        list = list->next_rel;
-    }
 
-    return NULL;
-}
- */
 
 // Report -----------------------------------------------------
 
 // Ordinamento rapido
 
 #define MAX 100
-/*
-void quicksort(rel_element_t array[MAX], int first, int last)
-{
-    int i, j, pivot;
-    rel_element_t tmp;
-
-    if (first < last)
-    {
-        pivot = first;
-        i = first;
-        j = last;
-
-        while (i < j)
-        {
-            while ((strcmp(array[i].name, array[pivot].name) <= 0) && i < last)
-            {
-                i++;
-            }
-            while (strcmp(array[j].name, array[pivot].name) > 0)
-                j--;
-
-            if (i < j)
-            {
-                tmp = array[i];
-                array[i] = array[j];
-                array[j] = tmp;
-            }
-        }
-
-        tmp = array[pivot];
-        array[pivot] = array[j];
-        array[j] = tmp;
-
-        quicksort(array, first, j-1);
-        quicksort(array, j+1, last);
-    }
-
-}
-*/
 
 void quicksort(rel_name_t array[MAX], int first, int last)
 {
